@@ -1,0 +1,12 @@
+{
+  "name": "vote-client",
+  "version": "0.0.1",
+  "description": "client app that connects to vote-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
