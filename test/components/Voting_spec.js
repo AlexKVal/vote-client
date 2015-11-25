@@ -28,4 +28,15 @@ describe('Voting', () => {
 
     expect(votedWith).to.equal('first');
   })
+
+  it('disables buttons when user has voted', () => {
+    const component = ReactTestUtils.renderIntoDocument(
+      <Voting pair={['f', 's']} hasVoted="f" />
+    );
+    const buttons = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button');
+
+    expect(buttons.length).to.equal(2);
+    expect(buttons[0].hasAttribute('disabled')).to.equal(true);
+    expect(buttons[1].hasAttribute('disabled')).to.equal(true);
+  })
 });
