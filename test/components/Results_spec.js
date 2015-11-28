@@ -23,20 +23,15 @@ describe('Results', () => {
     expect(second).to.contain('0');
   })
 
-  it('invokes the next callback when next button is clicked', () => {
-    let nextInvoked = false;
-    const next = () => nextInvoked = true;
-
+  it('invokes the next callback when next button is clicked', (done) => {
     const pair = List.of('Trainspotting', '28 Days Later');
     const component = ReactTestUtils.renderIntoDocument(
       <Results
         pair={pair}
         tally={Map()}
-        next={next}
+        next={() => done()}
       />
     );
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(component.refs.next));
-
-    expect(nextInvoked).to.equal(true);
   })
 })
