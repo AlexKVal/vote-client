@@ -18,6 +18,7 @@ export default React.createClass({
 
   render: function() {
     return <div className="results">
+      <div className="tally">
       {
         this.getPair().map( entry =>
           <div key={entry} className="entry">
@@ -28,6 +29,16 @@ export default React.createClass({
           </div>
         )
       }
+      </div>
+      <div className="management">
+        <button
+          ref="next"
+          className="next"
+          onClick={this.props.next}
+        >
+        Next
+        </button>
+      </div>
     </div>
   }
 })

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import {List, Map} from 'immutable';
 import {expect} from 'chai';
@@ -20,5 +21,22 @@ describe('Results', () => {
     expect(first).to.contain('5');
     expect(second).to.contain('second');
     expect(second).to.contain('0');
+  })
+
+  it('invokes the next callback when next button is clicked', () => {
+    let nextInvoked = false;
+    const next = () => nextInvoked = true;
+
+    const pair = List.of('Trainspotting', '28 Days Later');
+    const component = ReactTestUtils.renderIntoDocument(
+      <Results
+        pair={pair}
+        tally={Map()}
+        next={next}
+      />
+    );
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(component.refs.next));
+
+    expect(nextInvoked).to.equal(true);
   })
 })
