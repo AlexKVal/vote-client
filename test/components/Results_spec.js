@@ -34,4 +34,17 @@ describe('Results', () => {
     );
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(component.refs.next));
   })
+
+  it('renders the winner when there is one', () => {
+    const component = ReactTestUtils.renderIntoDocument(
+      <Results
+        winner="Trainspotting"
+        pair={["Trainspotting", "28 Days Later"]}
+        tally={Map()}
+      />
+    );
+    const winner = ReactDOM.findDOMNode(component.refs.winner);
+    expect(winner).to.be.ok;
+    expect(winner.textContent).to.contain('Trainspotting');
+  })
 })
