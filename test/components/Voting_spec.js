@@ -4,6 +4,8 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import {List} from 'immutable';
 import {expect} from 'chai';
 
+import {render} from '../helpers';
+
 import Voting from '../../src/components/Voting';
 
 describe('Voting', () => {
@@ -66,30 +68,28 @@ describe('Voting', () => {
   // use benefits of immutability
   it('renders as a pure component', () => {
     const pair = ['first', 'second'];
-    const component = ReactTestUtils.renderIntoDocument(
-      <Voting pair={pair} />
-    );
+    let component = render(<Voting pair={pair} />);
 
     let firstButton = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
     expect(firstButton.textContent).to.equal('first');
 
     pair[0] = 'Third';
-    component.setProps({pair});
+    // component.setProps({pair});
+    component = component.renderWithProps({pair});
     firstButton = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
     expect(firstButton.textContent).to.equal('first');
   })
 
   it('does update DOM when prop changes', () => {
     const pair = List.of('first', 'second');
-    const component = ReactTestUtils.renderIntoDocument(
-      <Voting pair={pair} />
-    );
+    let component = render(<Voting pair={pair} />);
 
     let firstButton = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
     expect(firstButton.textContent).to.equal('first');
 
     const newPair = pair.set(0, 'Third');
-    component.setProps({pair: newPair});
+    // component.setProps({pair: newPair});
+    component = component.renderWithProps({pair: newPair});
     firstButton = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
     expect(firstButton.textContent).to.equal('Third');
   })
