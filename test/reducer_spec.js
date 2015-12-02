@@ -68,6 +68,31 @@ describe('reducer', () => {
     }))
   })
 
+  it('removes hasVoted on SET_STATE if pair changes', () => {
+    const initialState = fromJS({
+      vote: {
+        pair: ['first', 'second'],
+        tally: {first: 1}
+      },
+      hasVoted: 'first'
+    });
+    const action = {
+      type: 'SET_STATE',
+      state: {
+        vote: {
+          pair: ['third', 'fourth']
+        }
+      }
+    };
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      vote: {
+        pair: ['third', 'fourth']
+      }
+    }));
+  })
+
   // the second action
   it('handles VOTE by setting hasVoted', () => {
     const state = fromJS({
