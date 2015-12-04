@@ -4,6 +4,7 @@
   "description": "client app that connects to vote-server",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server",
     "test": "mocha --compilers js:babel-core/register --require test/test_helper.js --recursive",
     "tdd": "npm run test -- --watch"
   },
